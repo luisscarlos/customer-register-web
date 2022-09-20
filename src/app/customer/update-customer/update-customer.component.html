@@ -1,0 +1,36 @@
+<div class="edit-customer-container">
+  <div>
+    <h3>Editar Cliente</h3>
+  </div>
+  <button mat-flat-button [routerLink]="['/view-customer', this.route.snapshot.params['id']]"><mat-icon>keyboard_arrow_left</mat-icon> Voltar</button>
+  <mat-card>
+    <mat-card-content>
+      <form class="form-container" [formGroup]="customerForm" (ngSubmit)="updateCustomer(customerForm.value)">
+        <mat-form-field>
+          <input matInput name="name" placeholder="Nome do Cliente" formControlName="name">
+        </mat-form-field>
+        <br/>
+        <mat-form-field>
+          <input  matInput size="2" name="customerType" placeholder="Tipo de Cliente(PF/PJ)" formControlName="customerType">
+        </mat-form-field>
+        <br/>
+        <mat-form-field>
+          <input matInput name="cpfCnpj" placeholder="CPF/CNPJ" formControlName="cpfCnpj">
+        </mat-form-field>
+        <br/>
+        <mat-form-field>
+          <input matInput name="rgIe" placeholder="RG/IE" formControlName="rgIe">
+        </mat-form-field>
+        <br/>
+        <br/>
+          <mat-checkbox matInput labelPosition="before" name="active" formControlName="active">Usuário ativo?</mat-checkbox>
+        <br/>
+        <div *ngFor="let data of phones; let i = index">
+          <p>Telefone {{i + 1}}: {{data.phone}}</p>
+        </div>
+
+        <button type="submit" [disabled]="!customerForm.valid" mat-button color="accent" >Salvar</button>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>

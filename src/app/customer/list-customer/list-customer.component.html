@@ -1,0 +1,19 @@
+<div class="list-customer-container">
+  <div>
+    <h3>Lista de clientes</h3>
+  </div>
+  <mat-form-field>
+    <input
+      matInput name="name"
+      placeholder="Pesquise pelo nome"
+      [(ngModel)]="name"
+      (ngModelChange)="findCustomerByName($event)">
+  </mat-form-field>
+  <mat-list *ngFor="let data of dataSource">
+    <mat-card routerLink="/view-customer/{{data.id}}" >
+      <mat-card-title>{{data.name}}</mat-card-title>
+      <mat-card-subtitle>{{data.customerType}}</mat-card-subtitle>
+      <mat-card-content>CPF/CNPJ: {{data.cpfCnpj}}</mat-card-content>
+    </mat-card>
+  </mat-list>
+</div>

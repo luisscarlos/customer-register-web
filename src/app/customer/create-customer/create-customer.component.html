@@ -1,0 +1,44 @@
+<div class="create-customer-container">
+  <div>
+    <h3>Cadastrar Cliente</h3>
+  </div>
+  <mat-card>
+    <mat-card-content>
+      <form class="form-container" [formGroup]="customerForm" (ngSubmit)="createCustomer(customerForm.value)">
+        <mat-form-field>
+          <input matInput name="name" placeholder="Nome do Cliente" formControlName="name">
+        </mat-form-field>
+        <br/>
+        <mat-form-field>
+          <input  matInput size="2" name="customerType" placeholder="Tipo de Cliente(PF/PJ)" formControlName="customerType">
+        </mat-form-field>
+        <br/>
+        <mat-form-field>
+          <input matInput name="cpfCnpj" placeholder="CPF/CNPJ" formControlName="cpfCnpj">
+        </mat-form-field>
+        <br/>
+        <mat-form-field>
+          <input matInput name="rgIe" placeholder="RG/IE" formControlName="rgIe">
+        </mat-form-field>
+        <br/>
+        <br/>
+          <mat-checkbox matInput labelPosition="before" name="active" formControlName="active">Usuário ativo?</mat-checkbox>
+        <br/>
+        <ng-container formArrayName="phoneList">
+          <div *ngFor="let phone of getPhonesFormControl.controls ; let i = index">
+            <mat-form-field [formGroupName]="i">
+              <input matInput id="phone {{i}}" name="phone" placeholder="Telefone {{i + 1}}" formControlName="phone">
+            </mat-form-field>
+            <button mat-button (click)="removePhone(i)" color="accent" >Remover telefone</button>
+          </div>
+        </ng-container>
+        <br/>
+        <button mat-button (click)="addPhone()" color="accent" >Adicionar telefone</button>
+        <br/>
+        <br/>
+        <button type="submit" [disabled]="!customerForm.valid" mat-button color="accent" >Salvar</button>
+      </form>
+    </mat-card-content>
+  </mat-card>
+  <pre>{{customerForm.value | json}}</pre>
+</div>
